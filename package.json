@@ -1,0 +1,22 @@
+{
+  "name": "lightwaverf_pwa",
+  "version": "1.0.0",
+  "description": "LightwaveRF progressive web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skysteve/lightwaverf_pwa.git"
+  },
+  "author": "skysteve",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/skysteve/lightwaverf_pwa/issues"
+  },
+  "homepage": "https://github.com/skysteve/lightwaverf_pwa#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
