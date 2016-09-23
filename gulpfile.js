@@ -51,6 +51,10 @@ gulp.task('script', () => {
   });
 });
 
+gulp.task('watch', () => {
+  gulp.watch(['src/**/*.js', 'src/**/html'], ['build']);
+});
+
 gulp.task('build', ['clean:dist', 'html']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);
