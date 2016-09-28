@@ -1,13 +1,13 @@
 /**
  * Created by steve on 22/09/2016.
  */
-import BiggerImage from '../components/BiggerImage';
+//import BiggerImage from '../components/BiggerImage';
 import DeviceManager from './DeviceManager';
 
-
-if (!window.customElements) {
+/*if (!window.customElements) {
+  alert('Upgrade your browser to view this page');
   throw new Error('Upgrade your browser to view this page');
-}
+}*/
 
 const deviceManager = new DeviceManager();
 deviceManager.fetch()
