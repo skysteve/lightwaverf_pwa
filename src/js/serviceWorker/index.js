@@ -9,6 +9,9 @@ const arrInstallCache = [
   '/js/main.js'
 ];
 
+self.addEventListener('activate', function(event) {
+  console.log("SW activated");
+});
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

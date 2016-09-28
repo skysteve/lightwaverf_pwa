@@ -5,6 +5,7 @@
 
 const del = require('del');
 const gulp = require('gulp');
+const gulpCopy = require('gulp-copy');
 const eslint = require('gulp-eslint');
 const inject = require('gulp-inject');
 const rollup = require('rollup').rollup;
@@ -17,6 +18,20 @@ gulp.task('clean:dist', function () {
     'dist/**/*.css',
     'dist/**/*.html',
   ]);
+});
+
+gulp.task('copyStatic', ['copyFavicon'], () => {
+  return gulp.src(['src/images/**/*', 'src/manifest.json'])
+    .pipe(gulpCopy('dist', {
+      prefix: 1
+    }));
+});
+
+gulp.task('copyFavicon', () => {
+  return gulp.src(['src/images/favicon*'])
+    .pipe(gulpCopy('dist', {
+      prefix: 2
+    }));
 });
 
 gulp.task('html', ['serviceWorker'], () => {
@@ -71,6 +86,6 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/*.js', 'src/**/html'], ['build']);
 });
 
-gulp.task('build', ['html']);
+gulp.task('build', ['html', 'copyStatic']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);

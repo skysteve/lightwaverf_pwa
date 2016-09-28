@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Lightwave RF</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ff0000">
+  <link rel="icon" sizes="192x192" href="/images/launcher-icon-192.png">
   <!-- inject:css -->
   <!-- endinject -->
 </head>
@@ -13,6 +16,12 @@
   <!-- inject:js -->
   <!-- endinject -->
   <script>
+    if (!navigator.serviceWorker.controller) {
+      console.log("This page is not controlled by a ServiceWorker (yet)");
+    } else {
+      console.log("This page is controlled by a ServiceWorker");
+    }
+
     // Let's register our serviceworker
     navigator.serviceWorker.register('sw.js', {
       // The scope cannot be parent to the script url

@@ -19,6 +19,7 @@
   "devDependencies": {
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-copy": "0.0.2",
     "gulp-eslint": "^3.0.1",
     "gulp-inject": "^4.1.0",
     "rollup": "^0.36.0",
