@@ -8,10 +8,19 @@
 </head>
 <body>
 
+  <pre id="temp"></pre>
 
   <!-- inject:js -->
   <!-- endinject -->
-  <app-drawer></app-drawer>
+  <script>
+    // Let's register our serviceworker
+    navigator.serviceWorker.register('sw.js', {
+      // The scope cannot be parent to the script url
+      scope: './'
+    })
+      .then((registration) => console.log('ServiceWorker registration successful with scope: ', registration.scope))
+      .catch((err) => console.log('ServiceWorker registration failed: ', err));
+  </script>
  <!-- <fancy-button></fancy-button>
   <button is="fancy-button" disabled>Fancy button!</button>-->
   <img is="bigger-img">

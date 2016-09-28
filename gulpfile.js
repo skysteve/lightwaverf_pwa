@@ -19,7 +19,7 @@ gulp.task('clean:dist', function () {
   ]);
 });
 
-gulp.task('html', ['script'], () => {
+gulp.task('html', ['serviceWorker'], () => {
   const target = gulp.src('./src/html/index.html');
   // It's not necessary to read the files (will speed up things), we're only after their paths:
   const sources = gulp.src(['./dist/js/main.js', './src/**/*.css'], {read: false});
@@ -35,17 +35,33 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
 );
 
-gulp.task('script', () => {
+gulp.task('script', ['clean:dist'], () => {
   return rollup({
     entry: 'src/js/index.js',
     plugins: [
       nodeResolve({ jsnext: true }),
       commonjs()
     ]
-  }).then(function (bundle) {
+  }).then((bundle) => {
     return bundle.write({
       format: 'iife',
       dest: 'dist/js/main.js',
+      sourceMap: true
+    });
+  });
+});
+
+gulp.task('serviceWorker', ['script'], () => {
+  return rollup({
+    entry: 'src/js/serviceWorker/index.js',
+    plugins: [
+      nodeResolve({ jsnext: true }),
+      commonjs()
+    ]
+  }).then((bundle) => {
+    return bundle.write({
+      format: 'iife',
+      dest: 'dist/sw.js',
       sourceMap: true
     });
   });
@@ -55,6 +71,6 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/*.js', 'src/**/html'], ['build']);
 });
 
-gulp.task('build', ['clean:dist', 'html']);
+gulp.task('build', ['html']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);
