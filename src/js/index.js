@@ -1,16 +1,16 @@
 /**
  * Created by steve on 22/09/2016.
  */
-//import BiggerImage from '../components/BiggerImage';
+// import BiggerImage from '../components/BiggerImage';
 import DeviceManager from './DeviceManager';
 
 const deviceManager = new DeviceManager();
 
 deviceManager.fetch()
-  .then(devices => document.querySelector('#temp').textContent = JSON.stringify(devices, null, 4))
+  .then(devices => document.querySelector('#temp').textContent = JSON.stringify(devices, null, 4)) // eslint-disable-line
   .catch(ex => console.error(ex));
 
-
+/* eslint-disable */
 
 /**********************  TODO - Some UI  *************************/
 

@@ -3,7 +3,7 @@
  */
 import Device from './Device';
 
-let mapStore = new WeakMap();
+const mapStore = new WeakMap();
 
 export default class Room {
   constructor(objDescription) {
@@ -27,6 +27,6 @@ export default class Room {
       id: this.id,
       name: this.name,
       devices: this.devices
-    }
+    };
   }
-};
+}

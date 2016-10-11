@@ -18,6 +18,9 @@
   "homepage": "https://github.com/skysteve/lightwaverf_pwa#readme",
   "devDependencies": {
     "del": "^2.2.2",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^2.0.1",
     "gulp": "^3.9.1",
     "gulp-copy": "0.0.2",
     "gulp-eslint": "^3.0.1",

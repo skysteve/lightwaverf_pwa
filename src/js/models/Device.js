@@ -2,7 +2,7 @@
  * Created by steve on 23/09/2016.
  */
 
-let mapStore = new WeakMap();
+const mapStore = new WeakMap();
 
 export default class Device {
   constructor(objDescription) {

@@ -40,9 +40,9 @@ export default class DeviceManager {
 
     return window.fetch(`${baseUrl}/devices`, options)
       .then(res => res.json())
-      .then(jsonRooms => {
+      .then((jsonRooms) => {
         this.rooms = jsonRooms.map(room => new Room(room));
         return this.rooms;
       });
   }
-};
+}
