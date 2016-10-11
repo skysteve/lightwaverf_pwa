@@ -5,6 +5,7 @@
 
 const del = require('del');
 const gulp = require('gulp');
+const gulpCopy = require('gulp-copy');
 const eslint = require('gulp-eslint');
 const inject = require('gulp-inject');
 const rollup = require('rollup').rollup;
@@ -19,7 +20,21 @@ gulp.task('clean:dist', function () {
   ]);
 });
 
-gulp.task('html', ['script'], () => {
+gulp.task('copyStatic', ['copyFavicon'], () => {
+  return gulp.src(['src/images/**/*', 'src/manifest.json'])
+    .pipe(gulpCopy('dist', {
+      prefix: 1
+    }));
+});
+
+gulp.task('copyFavicon', () => {
+  return gulp.src(['src/images/favicon*'])
+    .pipe(gulpCopy('dist', {
+      prefix: 2
+    }));
+});
+
+gulp.task('html', ['serviceWorker'], () => {
   const target = gulp.src('./src/html/index.html');
   // It's not necessary to read the files (will speed up things), we're only after their paths:
   const sources = gulp.src(['./dist/js/main.js', './src/**/*.css'], {read: false});
@@ -35,17 +50,33 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
 );
 
-gulp.task('script', () => {
+gulp.task('script', ['clean:dist'], () => {
   return rollup({
     entry: 'src/js/index.js',
     plugins: [
       nodeResolve({ jsnext: true }),
       commonjs()
     ]
-  }).then(function (bundle) {
+  }).then((bundle) => {
     return bundle.write({
       format: 'iife',
       dest: 'dist/js/main.js',
+      sourceMap: true
+    });
+  });
+});
+
+gulp.task('serviceWorker', ['script'], () => {
+  return rollup({
+    entry: 'src/js/serviceWorker/index.js',
+    plugins: [
+      nodeResolve({ jsnext: true }),
+      commonjs()
+    ]
+  }).then((bundle) => {
+    return bundle.write({
+      format: 'iife',
+      dest: 'dist/sw.js',
       sourceMap: true
     });
   });
@@ -55,6 +86,6 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/*.js', 'src/**/html'], ['build']);
 });
 
-gulp.task('build', ['clean:dist', 'html']);
+gulp.task('build', ['html', 'copyStatic']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);

@@ -4,15 +4,23 @@
 //import BiggerImage from '../components/BiggerImage';
 import DeviceManager from './DeviceManager';
 
-/*if (!window.customElements) {
-  alert('Upgrade your browser to view this page');
-  throw new Error('Upgrade your browser to view this page');
-}*/
-
 const deviceManager = new DeviceManager();
+
 deviceManager.fetch()
-  .then(devices => document.write(JSON.stringify(devices, null, 4)))
+  .then(devices => document.querySelector('#temp').textContent = JSON.stringify(devices, null, 4))
   .catch(ex => console.error(ex));
+
+
+
+/**********************  TODO - Some UI  *************************/
+
+
+
+/*if (!window.customElements) {
+ alert('Upgrade your browser to view this page');
+ throw new Error('Upgrade your browser to view this page');
+ }*/
+
 
 /*
 customElements.define('bigger-img', BiggerImage, {extends: 'img'});
