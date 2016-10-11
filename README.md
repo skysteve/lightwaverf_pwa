@@ -1,2 +1,2 @@
 # lightwaverf_pwa
-Frontend for a lightwaverf progressive webapp 
+Frontend for a lightwaverf progressive webapp
