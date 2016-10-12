@@ -3,7 +3,7 @@
  */
 import Room from './models/Room';
 
-const baseUrl = 'http://192.168.1.109:7890';
+const baseUrl = 'https://192.168.1.109:7890';
 
 export default class DeviceManager {
 
