@@ -1,7 +1,7 @@
 /**
  * Created by steve on 13/10/2016.
  */
-import {Room as ViewRoom} from './Room';
+import { Room as ViewRoom } from './Room';
 
 export class RoomList {
 
@@ -13,7 +13,7 @@ export class RoomList {
     const elListRoot = document.querySelector('#roomList');
     const template_listItem = document.querySelector('#template_listItem');
 
-    this.rooms.forEach(room => {
+    this.rooms.forEach((room) => {
       const view = new ViewRoom(room);
       const temp_li = template_listItem.cloneNode(true);
 

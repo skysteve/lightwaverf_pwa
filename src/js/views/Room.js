@@ -1,7 +1,7 @@
 /**
  * Created by steve on 13/10/2016.
  */
-import {Device as ViewDevice} from './Device';
+import { Device as ViewDevice } from './Device';
 
 const mapStore = new WeakMap();
 
@@ -22,7 +22,7 @@ export class Room {
 
     template_card.content.querySelector('.mdl-card__title-text').textContent = this.model.name;
 
-    this.model.devices.forEach(device => {
+    this.model.devices.forEach((device) => {
       const view = new ViewDevice(device);
       const temp_li = template_listItem.cloneNode(true);
 
