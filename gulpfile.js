@@ -2,7 +2,8 @@
  * Created by steve on 22/09/2016.
  */
 'use strict';
-
+const fs = require('fs');
+const glob = require('glob');
 const del = require('del');
 const gulp = require('gulp');
 const gulpCopy = require('gulp-copy');
@@ -41,6 +42,17 @@ gulp.task('html', ['serviceWorker'], () => {
 
   return target.pipe(inject(sources, {ignorePath: 'dist'}))
     .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('includeTemplates', ['html'], () => {
+  let fileContents = fs.readFileSync('./dist/index.html').toString();
+  const templateFiles = glob.sync('./src/html/templates/**/*.html');
+  const templateString = templateFiles.map(file => {
+    return fs.readFileSync(file);
+  }).join('\n');
+
+  fileContents = fileContents.replace('<!--INCLUDE_TEMPLATES-->', templateString);
+  fs.writeFileSync('./dist/index.html', fileContents)
 });
 
 gulp.task('lint', () =>
@@ -83,9 +95,9 @@ gulp.task('serviceWorker', ['script'], () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['src/**/*.js', 'src/**/html'], ['build']);
+  gulp.watch(['src/**/*.js', 'src/**/*.html'], ['build']);
 });
 
-gulp.task('build', ['html', 'copyStatic']);
+gulp.task('build', ['includeTemplates', 'copyStatic']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);

@@ -1,7 +1,6 @@
 /**
  * Created by steve on 23/09/2016.
  */
-
 const mapStore = new WeakMap();
 
 export default class Device {
@@ -9,8 +8,23 @@ export default class Device {
     mapStore.set(this, objDescription);
   }
 
+  get devices() {
+    return mapStore.get(this).devices;
+  }
+
   get id() {
     return mapStore.get(this).id;
+  }
+
+  get icon() {
+    switch (this.type) {
+      case 'dimmer':
+        return 'lightbulb_outline';
+      case 'socket':
+        return 'power';
+      default:
+        return 'cake';
+    }
   }
 
   get name() {

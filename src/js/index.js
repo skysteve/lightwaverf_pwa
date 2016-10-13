@@ -3,12 +3,26 @@
  */
 // import BiggerImage from '../components/BiggerImage';
 import DeviceManager from './DeviceManager';
+import {RoomList as ViewRoomList} from './views/RoomList';
 
 const deviceManager = new DeviceManager();
 
 deviceManager.fetch()
-  .then(devices => document.querySelector('#temp').textContent = JSON.stringify(devices, null, 4)) // eslint-disable-line
+  .then(rooms => new ViewRoomList(rooms))
+  .then(viewRooms => viewRooms.render())
   .catch(ex => console.error(ex));
+
+//
+// const elContent = document.querySelector('#test');
+//
+// const template_card = document.querySelector('#template_card');
+// const template_listItem = document.querySelector('#template_listItem');
+//
+// template_card.content.querySelector('.mdl-card__title-text').textContent = 'Living Room';
+//
+// const clone = document.importNode(template_card.content, true);
+// template_listItem.content.querySelector('mdl-list__item-primary-content').appendChild(clone);
+// elContent.appendChild(clone);
 
 /* eslint-disable */
 
