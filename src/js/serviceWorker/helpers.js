@@ -2,8 +2,6 @@
  * Created by steve on 28/09/2016.
  */
 
-const serverUrl = 'https://ha.skysteve.com:7890';
-
 export function fetchAndCache(event, caches, CACHE_NAME) {
   const fetchRequest = event.request.clone();
 

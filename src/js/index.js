@@ -1,7 +1,7 @@
 /**
  * Created by steve on 22/09/2016.
  */
-import * as materialDesign from 'material-design-lite';
+import * as materialDesign from 'material-design-lite'; // eslint-disable-line
 import DeviceManager from './DeviceManager';
 import { RoomList as ViewRoomList } from './views/RoomList';
 

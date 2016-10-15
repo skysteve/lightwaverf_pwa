@@ -11,15 +11,6 @@ const arrInstallCache = [
 
 self.addEventListener('activate', () => {
   console.log('SW activated');
-
-  try {
-    const notification = document.querySelector('.mdl-js-snackbar');
-    notification.MaterialSnackbar.showSnackbar({
-      message: 'SW activated'
-    });
-  } catch (ex) {
-
-  }
 });
 
 self.addEventListener('install', (event) => {
