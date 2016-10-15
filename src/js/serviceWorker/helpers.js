@@ -2,9 +2,6 @@
  * Created by steve on 28/09/2016.
  */
 
-const serverUrl = 'https://192.168.1.109:7890';
-
-
 export function fetchAndCache(event, caches, CACHE_NAME) {
   const fetchRequest = event.request.clone();
 
@@ -15,7 +12,7 @@ export function fetchAndCache(event, caches, CACHE_NAME) {
     }
 
     // if not a GET request or is to any external entity other than our server's url - don't cache
-    if (fetchRequest.method !== 'GET' || (response.type !== 'basic' && !fetchRequest.url.includes(serverUrl))) {
+    if (fetchRequest.method !== 'GET') {
       return response;
     }
 

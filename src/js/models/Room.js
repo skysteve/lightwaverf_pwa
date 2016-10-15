@@ -19,7 +19,7 @@ export default class Room {
   }
 
   get devices() {
-    return mapStore.get(this).devices.map(device => new Device(device));
+    return mapStore.get(this).devices.map(device => new Device(device, this));
   }
 
   toJSON() {

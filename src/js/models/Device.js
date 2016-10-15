@@ -1,24 +1,51 @@
 /**
  * Created by steve on 23/09/2016.
  */
+import DeviceManager from '../DeviceManager';
 
 const mapStore = new WeakMap();
 
 export default class Device {
-  constructor(objDescription) {
-    mapStore.set(this, objDescription);
+  constructor(objDescription, room) {
+    mapStore.set(this, {
+      device: objDescription,
+      room: room
+    });
+  }
+
+  deviceOn() {
+    DeviceManager.execCommand('deviceOn', this.roomId, this.id);
+  }
+
+  deviceOff() {
+    DeviceManager.execCommand('deviceOff', this.roomId, this.id);
   }
 
   get id() {
-    return mapStore.get(this).id;
+    return mapStore.get(this).device.id;
+  }
+
+  get icon() {
+    switch (this.type) {
+      case 'dimmer':
+        return 'lightbulb_outline';
+      case 'socket':
+        return 'power';
+      default:
+        return 'cake';
+    }
   }
 
   get name() {
-    return mapStore.get(this).name;
+    return mapStore.get(this).device.name;
+  }
+
+  get roomId() {
+    return mapStore.get(this).room.id;
   }
 
   get type() {
-    return mapStore.get(this).type;
+    return mapStore.get(this).device.type;
   }
 
   toJSON() {
