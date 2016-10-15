@@ -44,7 +44,10 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
-      <p id="loading-msg">If you are seeing this message, your browser doesn't support this site or failed to load devices</p>
+      <p id="loading-msg">
+        If you are seeing this message, your browser doesn't support this site or failed to load devices.
+        Try visiting <a href="https://ha.skysteve.com:7890/devices">https://ha.skysteve.com:7890/devices</a>
+      </p>
       <ul class="mdl-list" id="roomList" style="display: none;">
 
       </ul>
@@ -62,7 +65,6 @@
 
 <!-- inject:js -->
 <!-- endinject -->
-<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <script>
   if (!navigator.serviceWorker.controller) {
     console.log("This page is not controlled by a ServiceWorker (yet)");

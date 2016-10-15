@@ -14,7 +14,7 @@ export function fetchAndCache(event, caches, CACHE_NAME) {
     }
 
     // if not a GET request or is to any external entity other than our server's url - don't cache
-    if (fetchRequest.method !== 'GET' || (response.type !== 'basic' && !fetchRequest.url.includes(serverUrl))) {
+    if (fetchRequest.method !== 'GET') {
       return response;
     }
 
