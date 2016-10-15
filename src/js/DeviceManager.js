@@ -29,7 +29,7 @@ export default class DeviceManager {
       return Promise.resolve(this.rooms);
     }
 
-    return window.fetch(`https://4p2rhkkdkb.execute-api.us-east-1.amazonaws.com/lw/devices`, options)
+    return window.fetch('https://4p2rhkkdkb.execute-api.us-east-1.amazonaws.com/lw/devices', options)
       .then(res => res.json())
       .then((jsonRooms) => {
         this.rooms = jsonRooms.map(room => new Room(room));
