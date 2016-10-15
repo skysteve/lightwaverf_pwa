@@ -14,6 +14,10 @@
     .mdl-card {
       width: 100%;
     }
+    #loading-msg {
+      width: 100%;
+      text-align: center;
+    }
   </style>
   <!-- inject:css -->
   <!-- endinject -->
@@ -40,7 +44,8 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
-      <ul class="mdl-list" id="roomList">
+      <p id="loading-msg">If you are seeing this message, your browser doesn't support this site or failed to load devices</p>
+      <ul class="mdl-list" id="roomList" style="display: none;">
 
       </ul>
     </div>
