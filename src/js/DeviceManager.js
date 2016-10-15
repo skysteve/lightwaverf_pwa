@@ -23,7 +23,7 @@ export default class DeviceManager {
   fetch() {
     const headers = new Headers();
 
-    myHeaders.append('x-api-key', 'Bek1RrO1MZ2EoC6HN8OGb8bEJ7YRFZLS9MhPz8ku');
+    headers.append('x-api-key', 'Bek1RrO1MZ2EoC6HN8OGb8bEJ7YRFZLS9MhPz8ku');
 
     const options = {
       headers,
