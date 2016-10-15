@@ -10,4 +10,4 @@ const deviceManager = new DeviceManager();
 deviceManager.fetch()
   .then(rooms => new ViewRoomList(rooms))
   .then(viewRooms => viewRooms.render())
-  .catch(ex => console.error(ex));
+  .catch(ex => console.error(ex, ex.stack));

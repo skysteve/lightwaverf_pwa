@@ -98,6 +98,9 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/*.js', 'src/**/*.html'], ['build']);
 });
 
+// TODO minify all the things
+// TODO pull in material design from npm
+
 gulp.task('build', ['includeTemplates', 'copyStatic']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);

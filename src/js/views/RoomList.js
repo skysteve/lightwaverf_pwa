@@ -21,6 +21,7 @@ export class RoomList {
         .appendChild(view.render());
 
       const clone = document.importNode(temp_li.content, true);
+      view.onRender(clone);
       elListRoot.appendChild(clone);
     });
   }

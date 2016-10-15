@@ -15,6 +15,12 @@ export class Room {
     return mapStore.get(this).model;
   }
 
+  onRender(el) {
+    el.querySelectorAll('.deviceList li').forEach((li, index) => {
+      this.devices[index].onRender(li);
+    });
+  }
+
   render() {
     const template_card = document.querySelector('#template_room_card').cloneNode(true);
     const template_listItem = document.querySelector('#template_listItem');
@@ -22,7 +28,7 @@ export class Room {
 
     template_card.content.querySelector('.mdl-card__title-text').textContent = this.model.name;
 
-    this.model.devices.forEach((device) => {
+    this.devices = this.model.devices.map((device) => {
       const view = new ViewDevice(device);
       const temp_li = template_listItem.cloneNode(true);
 
@@ -31,6 +37,8 @@ export class Room {
 
       const clone = document.importNode(temp_li.content, true);
       elListRoot.appendChild(clone);
+
+      return view;
     });
 
     return document.importNode(template_card.content, true);

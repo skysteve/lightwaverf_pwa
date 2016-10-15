@@ -3,7 +3,7 @@
  */
 import Room from './models/Room';
 
-const baseUrl = 'https://192.168.1.109:7890';
+const baseUrl = 'https://ha.skysteve.com:7890';
 
 export default class DeviceManager {
 
@@ -16,17 +16,8 @@ export default class DeviceManager {
     const dimLevel = searchParams.get('dimLevel');
 
     if (!!room && !!device && !!command) {
-      this.execCommand(command, room, device, dimLevel);
+      DeviceManager.execCommand(command, room, device, dimLevel);
     }
-  }
-
-  execCommand(command, room, device, dimLevel) {
-    navigator.sendBeacon(`${baseUrl}/command`, JSON.stringify({
-      command: command,
-      room: room,
-      device: device,
-      dimLevel: dimLevel
-    }));
   }
 
   fetch() {
@@ -44,5 +35,14 @@ export default class DeviceManager {
         this.rooms = jsonRooms.map(room => new Room(room));
         return this.rooms;
       });
+  }
+
+  static execCommand(command, room, device, dimLevel) {
+    navigator.sendBeacon(`${baseUrl}/command`, JSON.stringify({
+      command: command,
+      room: room,
+      device: device,
+      dimLevel: dimLevel
+    }));
   }
 }
