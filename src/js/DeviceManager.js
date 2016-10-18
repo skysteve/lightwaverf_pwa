@@ -45,14 +45,14 @@ export default class DeviceManager {
 
     return window.fetch(awsDeviceUrl, options)
       .then(res => res.json())
-      .then(jsonRooms => {
+      .then((jsonRooms) => {
         return jsonRooms.sort((a, b) => {
-            if (a.id > b.id) {
-              return 1;
-            }
+          if (a.id > b.id) {
+            return 1;
+          }
 
-            return a.id < b.id ? -1 : 0;
-          });
+          return a.id < b.id ? -1 : 0;
+        });
       })
       .then((jsonRooms) => {
         localStorage.setItem(cacheKey, JSON.stringify(jsonRooms));
