@@ -14,11 +14,11 @@ export default class Device {
   }
 
   deviceOn() {
-    DeviceManager.execCommand('deviceOn', this.roomId, this.id);
+    return DeviceManager.execCommand('deviceOn', this.roomId, this.id);
   }
 
   deviceOff() {
-    DeviceManager.execCommand('deviceOff', this.roomId, this.id);
+    return DeviceManager.execCommand('deviceOff', this.roomId, this.id);
   }
 
   get id() {

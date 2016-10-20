@@ -16,13 +16,15 @@ export class Device {
   onRender(el) {
     // setup on click events
     el.querySelector('.device-on').addEventListener('click', () => {
-      this.model.deviceOn();
-      this.showToast();
+      this.model.deviceOn()
+        .then(() => this.showToast())
+        .catch(err => this.showToast(err));
     });
 
     el.querySelector('.device-off').addEventListener('click', () => {
-      this.model.deviceOff();
-      this.showToast();
+      this.model.deviceOff()
+        .then(() => this.showToast())
+        .catch(err => this.showToast(err));
     });
   }
 
@@ -34,10 +36,10 @@ export class Device {
     return document.importNode(template_card.content, true);
   }
 
-  showToast() {
+  showToast(err) {
     const notification = document.querySelector('.mdl-js-snackbar');
     notification.MaterialSnackbar.showSnackbar({
-      message: 'Command sent'
+      message: err ? err.message : 'Command sent'
     });
   }
 }

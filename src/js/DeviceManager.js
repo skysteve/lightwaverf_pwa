@@ -3,9 +3,17 @@
  */
 import Room from './models/Room';
 
-const awsDeviceUrl = 'https://8r3niqkqtf.execute-api.us-east-1.amazonaws.com/lw/devices';
-const baseUrl = 'http://ha.skysteve.com:7890';
+const baseUrl = 'https://8r3niqkqtf.execute-api.us-east-1.amazonaws.com/lw';
 const cacheKey = 'roomsCache';
+
+const headers = new Headers();
+
+headers.append('x-api-key', 'Bek1RrO1MZ2EoC6HN8OGb8bEJ7YRFZLS9MhPz8ku');
+
+const fetchOptions = {
+  headers,
+  mode: 'cors'
+};
 
 export default class DeviceManager {
 
@@ -23,15 +31,6 @@ export default class DeviceManager {
   }
 
   fetch() {
-    const headers = new Headers();
-
-    headers.append('x-api-key', 'Bek1RrO1MZ2EoC6HN8OGb8bEJ7YRFZLS9MhPz8ku');
-
-    const options = {
-      headers,
-      mode: 'cors'
-    };
-
     if (this.rooms) {
       return Promise.resolve(this.rooms);
     }
@@ -43,7 +42,7 @@ export default class DeviceManager {
       return Promise.resolve(this.rooms);
     }
 
-    return window.fetch(awsDeviceUrl, options)
+    return window.fetch(`${baseUrl}/devices`, fetchOptions)
       .then(res => res.json())
       .then((jsonRooms) => {
         return jsonRooms.sort((a, b) => {
@@ -62,11 +61,14 @@ export default class DeviceManager {
   }
 
   static execCommand(command, room, device, dimLevel) {
-    navigator.sendBeacon(`${baseUrl}/command`, JSON.stringify({
-      command: command,
-      room: room,
-      device: device,
-      dimLevel: dimLevel
+    return window.fetch(`${baseUrl}/exec`, Object.assign(fetchOptions, {
+      method: 'post',
+      body: JSON.stringify({
+        command: command,
+        room: room,
+        device: device,
+        dimLevel: dimLevel
+      })
     }));
   }
 }
