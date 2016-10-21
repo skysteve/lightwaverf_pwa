@@ -9,8 +9,7 @@ export class RoomList {
     this.rooms = rooms;
   }
 
-  render() {
-    const elListRoot = document.querySelector('#roomList');
+  render(elListRoot) {
     const template_listItem = document.querySelector('#template_listItem');
 
     this.rooms.forEach((room) => {
