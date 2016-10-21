@@ -3,20 +3,12 @@
  */
 import * as materialDesign from 'material-design-lite'; // eslint-disable-line
 import DeviceManager from './DeviceManager';
-import { RoomList as ViewRoomList } from './views/RoomList';
+import initRouter from './router';
 
 const deviceManager = new DeviceManager();
 
 deviceManager.fetch()
-  .then(rooms => new ViewRoomList(rooms))
-  .then(viewRooms => viewRooms.render())
-  .then(() => {
-    const elLoading = document.querySelector('#loading-msg');
-    elLoading.style.display = 'none';
-
-    const elRooms = document.querySelector('#roomList');
-    elRooms.removeAttribute('style');
-  })
+  .then(rooms => initRouter(rooms))
   .catch(ex => console.error(ex, ex.stack));
 
 
