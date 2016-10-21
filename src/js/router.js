@@ -3,6 +3,7 @@
  */
 
 import { Page as PageRooms } from './views/rooms/Page';
+import { Page as PageSettings } from './views/settings/Page';
 
 class Handlers {
   constructor(rooms) {
@@ -20,28 +21,40 @@ class Handlers {
     }
   }
 
+  renderContent(content) {
+    this.elContent.innerHTML = '';
+    this.elContent.appendChild(content);
+  }
+
   route_rooms() {
     const viewRooms = new PageRooms();
 
-    const content = viewRooms.render(this.rooms);
-
-    this.elContent.innerHTML = '';
-    this.elContent.appendChild(content)
+    this.renderContent(viewRooms.render());
+    viewRooms.onRender(this.rooms);
   }
 
+  route_settings() {
+    const viewSettings = new PageSettings();
 
+    this.renderContent(viewSettings.render());
+    viewSettings.onRender();
+  }
 }
-
-
 
 export default function initRouter(rooms) {
   const handlers = new Handlers(rooms);
   window.addEventListener('hashchange', handlers.handleUrl.bind(handlers), false);
+
+  // if we have no access key, load the settings page
+  if (!localStorage.getItem('accessKey')) {
+    location.hash = 'settings';
+    return;
+  }
+
   // if we already have a hash, load that page, otherwise load rooms list
   if (location.hash) {
     handlers.handleUrl();
   } else {
     location.hash = 'rooms';
   }
-
 }

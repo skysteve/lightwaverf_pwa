@@ -5,15 +5,15 @@ import { RoomList as ViewRoomList } from './RoomList';
 
 export class Page {
 
-  render(rooms) {
+  onRender(rooms) {
+    // TODO this is a bit backwards but was quick for now
+    const elRoomList = document.querySelector('#roomList');
     const viewRooms = new ViewRoomList(rooms);
-
-    const template = document.querySelector('#template_page_rooms');
-    const elRoomList = template.content.querySelector('#roomList');
-
-    // TODO should return content instead?
     viewRooms.render(elRoomList);
+  }
 
+  render() {
+    const template = document.querySelector('#template_page_rooms');
     return document.importNode(template.content, true);
   }
 }

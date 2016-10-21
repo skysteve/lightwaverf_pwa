@@ -6,14 +6,18 @@ import Room from './models/Room';
 const baseUrl = 'https://8r3niqkqtf.execute-api.us-east-1.amazonaws.com/lw';
 const cacheKey = 'roomsCache';
 
-const headers = new Headers();
 
-headers.append('x-api-key', 'Bek1RrO1MZ2EoC6HN8OGb8bEJ7YRFZLS9MhPz8ku');
+function getFetchOptions() {
+  const headers = new Headers();
 
-const fetchOptions = {
-  headers,
-  mode: 'cors'
-};
+// TODO validate we have an access key and bounce to settings if not
+  headers.append('x-api-key', localStorage.getItem('accessKey'));
+
+  return {
+    headers,
+    mode: 'cors'
+  };
+}
 
 export default class DeviceManager {
 
@@ -42,7 +46,7 @@ export default class DeviceManager {
       return Promise.resolve(this.rooms);
     }
 
-    return window.fetch(`${baseUrl}/devices`, fetchOptions)
+    return window.fetch(`${baseUrl}/devices`, getFetchOptions())
       .then(res => res.json())
       .then((jsonRooms) => {
         return jsonRooms.sort((a, b) => {
@@ -61,7 +65,7 @@ export default class DeviceManager {
   }
 
   static execCommand(command, room, device, dimLevel) {
-    return window.fetch(`${baseUrl}/exec`, Object.assign(fetchOptions, {
+    return window.fetch(`${baseUrl}/exec`, Object.assign(getFetchOptions(), {
       method: 'post',
       body: JSON.stringify({
         command: command,
